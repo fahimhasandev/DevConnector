@@ -7,7 +7,7 @@ const connectDb = require('./config/db');
 connectDb();
 
 //Init Middlewae
-app.use(express.json()) // allow us to get data in json format
+app.use(express.json()) // allow us to get data from req.body
 
 
 app.get('/', (req, res) => {

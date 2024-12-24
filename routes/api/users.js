@@ -5,17 +5,21 @@ const router = express.Router();
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const dotenv = require('dotenv');
+dotenv.config();
+
 /**
  * @routes   POST api/users
  * @desc     Register Users
  * @access   Public
  *
  */
+
+//sign up user
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
+    check('name', 'Name is required').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -71,9 +75,10 @@ router.post(
           id: user.id,
         },
       };
+
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        process.env.JWTSecret,
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;

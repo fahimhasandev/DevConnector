@@ -1,6 +1,5 @@
 // mongodb connection
 const mongoose = require('mongoose');
-const config = require('config');
 // const db = config.get('mongoURI');
 const dotenv = require('dotenv');
 //const db = process.env.MONGODB_URI;
@@ -10,7 +9,7 @@ dotenv.config();
 // connect to mongoDB
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, {});
     //await mongoose.connect(db); // since it is a promise
     console.log('MongoDB Connected....');
   } catch (error) {
